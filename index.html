@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tessellate</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- Title Screen -->
+        <div id="title-screen" class="screen active">
+            <div class="title-content">
+                <div class="title-icon">⬡</div>
+                <h1>TESSELLATE</h1>
+                <p class="subtitle">PATTERNS OF THE ANCIENTS</p>
+                <div class="title-divider"></div>
+                <p class="title-quote">"Every pattern is a key. Every key opens a door."</p>
+                <button id="btn-start" class="btn-ancient">BEGIN</button>
+            </div>
+        </div>
+
+        <!-- Level Select -->
+        <div id="level-screen" class="screen">
+            <div class="level-header">
+                <button id="btn-back-title" class="btn-ancient btn-small">← RETURN</button>
+                <h2>SELECT CHAMBER</h2>
+            </div>
+            <div class="level-divider"></div>
+            <div id="level-grid" class="level-grid"></div>
+            <div class="random-section">
+                <div class="level-divider"></div>
+                <h3>RANDOM PUZZLE</h3>
+                <div class="difficulty-buttons">
+                    <button id="btn-rand-easy" class="btn-ancient btn-diff btn-easy">EASY</button>
+                    <button id="btn-rand-medium" class="btn-ancient btn-diff btn-medium">MEDIUM</button>
+                    <button id="btn-rand-hard" class="btn-ancient btn-diff btn-hard">HARD</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <button id="btn-back-levels" class="btn-ancient btn-small">← CHAMBERS</button>
+                <h2 id="level-title">CHAMBER I</h2>
+                <div class="header-controls">
+                    <button id="btn-reset" class="btn-ancient btn-small">RESET</button>
+                    <button id="btn-check" class="btn-ancient btn-small">CHECK</button>
+                </div>
+            </div>
+
+            <div class="game-area">
+                <div id="board-container" class="board-container">
+                    <div id="board" class="board"></div>
+                </div>
+
+                <div class="piece-tray-container">
+                    <h3>PIECES</h3>
+                    <div class="tray-hint">Drag pieces to place · Right-click/scroll to rotate · Drag placed pieces to move</div>
+                    <div id="piece-tray" class="piece-tray"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Win Screen -->
+        <div id="win-screen" class="screen">
+            <div class="win-content">
+                <div class="win-icon">⬡</div>
+                <h2>CHAMBER SOLVED</h2>
+                <div class="win-divider"></div>
+                <p class="win-quote" id="win-quote">"The pattern reveals itself to the patient."</p>
+                <div class="win-buttons">
+                    <button id="btn-next-level" class="btn-ancient">NEXT CHAMBER</button>
+                    <button id="btn-win-levels" class="btn-ancient btn-secondary">CHAMBERS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
