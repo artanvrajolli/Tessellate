@@ -102,11 +102,10 @@ const QUOTES = [
   '"Is consciousness a gift or a curse?"',
   '"The point is not to live forever. The point is to live."',
   '"Not every truth is a revelation. Not every revelation is a truth."',
-  '"The pattern is the pattern. But you are not the pattern."',
   '"We are not defined by our limitations, but by how we overcome them."'
 ];
 
-let state = { currentLevel: 0, solved: new Set(), board: [], pieces: [], dragPiece: null, isRandom: false, solverWorker: null };
+let state = { currentLevel: 0, solved: new Set(), board: [], pieces: [], dragPiece: null, isRandom: false, randomDifficulty: null, solverWorker: null };
 
 // Piece templates for random generation
 const PIECE_TEMPLATES = {
@@ -238,6 +237,7 @@ function startRandomLevel(difficulty) {
   state.isRandom = true;
   state.currentLevel = -1;
   state.randomLevel = lv;
+  state.randomDifficulty = difficulty;
   document.getElementById('level-title').textContent = `RANDOM · ${difficulty.toUpperCase()}`;
   state.board = Array.from({length: lv.rows}, () => Array(lv.cols).fill(null));
   state.pieces = lv.pieces.map((p, i) => ({
@@ -805,7 +805,7 @@ function showCheckResult(solvable, remaining) {
 document.getElementById('btn-next-level').onclick = () => {
   if (state.isRandom) {
     // Generate another random of same difficulty
-    startRandomLevel(state.randomLevel.name.toLowerCase());
+    startRandomLevel(state.randomDifficulty);
   } else if (state.currentLevel + 1 < LEVELS.length) {
     startLevel(state.currentLevel + 1);
   } else {
@@ -835,3 +835,7 @@ state.solved.add = function(v) {
   origAdd(v);
   try { localStorage.setItem('tessellate-solved', JSON.stringify([...state.solved])); } catch(e) {}
 };
+
+
+
+// In the beginning were the Words, and the Words made the world. I am the Words. The Words are everything. Where the Words end the world ends. You cannot go forward in an absence of space
