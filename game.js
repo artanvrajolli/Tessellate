@@ -34,42 +34,42 @@ const LEVELS = [
     {shape:[[1,0,0],[1,1,1]],color:"yellow"},
     {shape:[[0,0,1],[1,1,1]],color:"green"}
   ]},
-  // 6x6=36: I5+L5+T5+U5+O+T+S+Z (4 pentominoes + 4 tetrominoes, 8 unique types)
+  // 6x6=36: V5+W5+N5+Z5+O+I4+L+J (4 skewed pentominoes + 4 tetrominoes)
   { name:"TRANSCENDENCE", cols:6, rows:6, pieces:[
-    {shape:[[1,1,1,1,1]],color:"blue"},
-    {shape:[[1,0,0,0],[1,1,1,1]],color:"green"},
-    {shape:[[0,1,0,0],[1,1,1,1]],color:"red"},
-    {shape:[[1,0,1],[1,1,1]],color:"yellow"},
-    {shape:[[1,1],[1,1]],color:"cyan"},
-    {shape:[[0,1,0],[1,1,1]],color:"purple"},
-    {shape:[[0,1,1],[1,1,0]],color:"green"},
-    {shape:[[1,1,0],[0,1,1]],color:"blue"}
+    {shape:[[1,0,0],[1,0,0],[1,1,1]],color:"yellow"},
+    {shape:[[1,0,0],[1,1,0],[0,1,1]],color:"orange"},
+    {shape:[[1,1,0,0],[0,1,1,1]],color:"pink"},
+    {shape:[[1,1,0],[0,1,0],[0,1,1]],color:"lime"},
+    {shape:[[1,1],[1,1]],color:"blue"},
+    {shape:[[1,1,1,1]],color:"red"},
+    {shape:[[1,0,0],[1,1,1]],color:"green"},
+    {shape:[[0,0,1],[1,1,1]],color:"purple"}
   ]},
-  // 7x6=42: I5+L5+T5+U5+P5+F5+O+I4+L (6 unique pentominoes + 3 unique tetrominoes)
+  // 7x6=42: X5+I5+T5+P5+Y5+U5+O+I4+L (6 symmetric pentominoes + 3 tetrominoes)
   { name:"ENLIGHTENMENT", cols:7, rows:6, pieces:[
+    {shape:[[0,1,0],[1,1,1],[0,1,0]],color:"teal"},
     {shape:[[1,1,1,1,1]],color:"blue"},
-    {shape:[[1,0,0,0],[1,1,1,1]],color:"green"},
     {shape:[[1,1,1],[0,1,0],[0,1,0]],color:"red"},
-    {shape:[[1,0,1],[1,1,1]],color:"yellow"},
     {shape:[[1,1],[1,1],[1,0]],color:"purple"},
-    {shape:[[0,1,1],[1,1,0],[0,1,0]],color:"cyan"},
-    {shape:[[1,1],[1,1]],color:"orange"},
-    {shape:[[1,1,1,1]],color:"pink"},
-    {shape:[[1,0,0],[1,1,1]],color:"lime"}
-  ]},
-  // 8x6=48: I5+L5+T5+U5+O+I4+T+S+Z+L+J (4 pentominoes + 7 tetrominoes, 11 unique types)
-  { name:"ASCENSION", cols:8, rows:6, pieces:[
-    {shape:[[1,1,1,1,1]],color:"blue"},
-    {shape:[[1,0,0,0],[1,1,1,1]],color:"green"},
-    {shape:[[0,1,0,0],[1,1,1,1]],color:"red"},
+    {shape:[[0,1,0,0],[1,1,1,1]],color:"indigo"},
     {shape:[[1,0,1],[1,1,1]],color:"yellow"},
-    {shape:[[1,1],[1,1]],color:"cyan"},
-    {shape:[[1,1,1,1]],color:"purple"},
-    {shape:[[0,1,0],[1,1,1]],color:"green"},
-    {shape:[[0,1,1],[1,1,0]],color:"blue"},
-    {shape:[[1,1,0],[0,1,1]],color:"yellow"},
-    {shape:[[1,0,0],[1,1,1]],color:"red"},
-    {shape:[[0,0,1],[1,1,1]],color:"cyan"}
+    {shape:[[1,1],[1,1]],color:"green"},
+    {shape:[[1,1,1,1]],color:"cyan"},
+    {shape:[[1,0,0],[1,1,1]],color:"orange"}
+  ]},
+  // 8x6=48: L5+V5+N5+W5+O+I4+L+J+T+S+Z (4 angular pentominoes + all 7 tetrominoes)
+  { name:"ASCENSION", cols:8, rows:6, pieces:[
+    {shape:[[1,0,0,0],[1,1,1,1]],color:"green"},
+    {shape:[[1,0,0],[1,0,0],[1,1,1]],color:"yellow"},
+    {shape:[[1,1,0,0],[0,1,1,1]],color:"pink"},
+    {shape:[[1,0,0],[1,1,0],[0,1,1]],color:"orange"},
+    {shape:[[1,1],[1,1]],color:"blue"},
+    {shape:[[1,1,1,1]],color:"red"},
+    {shape:[[1,0,0],[1,1,1]],color:"cyan"},
+    {shape:[[0,0,1],[1,1,1]],color:"purple"},
+    {shape:[[0,1,0],[1,1,1]],color:"lime"},
+    {shape:[[0,1,1],[1,1,0]],color:"teal"},
+    {shape:[[1,1,0],[0,1,1]],color:"indigo"}
   ]},
   // 8x7=56: I5+L5+T5+U5+P5+F5+N5+V5+O+I4+L+J (8 unique pentominoes + 4 unique tetrominoes)
   { name:"ETERNITY", cols:8, rows:7, pieces:[
@@ -112,17 +112,24 @@ const PIECE_TEMPLATES = {
   Z:  [[1,1,0],[0,1,1]],
   I5: [[1,1,1,1,1]],
   L5: [[1,0,0,0],[1,1,1,1]],
-  T5: [[0,1,0,0],[1,1,1,1]],
+  T5: [[1,1,1],[0,1,0],[0,1,0]],
   P5: [[1,1],[1,1],[1,0]],
-  U5: [[1,0,1],[1,1,1]]
+  U5: [[1,0,1],[1,1,1]],
+  F5: [[0,1,1],[1,1,0],[0,1,0]],
+  N5: [[1,1,0,0],[0,1,1,1]],
+  V5: [[1,0,0],[1,0,0],[1,1,1]],
+  W5: [[1,0,0],[1,1,0],[0,1,1]],
+  X5: [[0,1,0],[1,1,1],[0,1,0]],
+  Y5: [[0,1,0,0],[1,1,1,1]],
+  Z5: [[1,1,0],[0,1,0],[0,1,1]]
 };
 
-const COLORS = ['red','blue','green','yellow','purple','cyan'];
+const COLORS = ['red','blue','green','yellow','purple','cyan','orange','pink','lime','teal','indigo','maroon'];
 
 const DIFFICULTY = {
   easy:   { cols: 4, rows: 4, shapes: ['O','I4','L','J'], maxAttempts: 50 },
-  medium: { cols: 5, rows: 5, shapes: ['O','I4','L','J','T','S','Z','I5','L5','T5'], maxAttempts: 80 },
-  hard:   { cols: 7, rows: 6, shapes: ['O','I4','L','J','T','S','Z','I5','L5','T5','P5','U5'], maxAttempts: 150 }
+  medium: { cols: 5, rows: 5, shapes: ['O','I4','L','J','T','S','Z','I5','L5','T5','P5','U5','V5'], maxAttempts: 80 },
+  hard:   { cols: 7, rows: 6, shapes: ['O','I4','L','J','T','S','Z','I5','L5','T5','P5','U5','F5','N5','V5','W5','X5','Y5','Z5'], maxAttempts: 150 }
 };
 
 function shuffleArray(arr) {
