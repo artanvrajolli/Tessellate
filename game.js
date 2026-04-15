@@ -96,7 +96,14 @@ const QUOTES = [
   '"To see the whole, one must first see the parts."',
   '"The ancients left these keys for those who would follow."',
   '"Understanding is not given—it is earned."',
-  '"At the end of all patterns lies the beginning."'
+  '"At the end of all patterns lies the beginning."',
+  '"There is much to be done, and you are the one to do it."',
+  '"Be mindful of the steps you take, for they define the path you follow."',
+  '"Is consciousness a gift or a curse?"',
+  '"The point is not to live forever. The point is to live."',
+  '"Not every truth is a revelation. Not every revelation is a truth."',
+  '"The pattern is the pattern. But you are not the pattern."',
+  '"We are not defined by our limitations, but by how we overcome them."'
 ];
 
 let state = { currentLevel: 0, solved: new Set(), board: [], pieces: [], dragPiece: null, isRandom: false, solverWorker: null };
@@ -706,9 +713,37 @@ document.getElementById('btn-reset').onclick = () => {
     startLevel(state.currentLevel);
   }
 };
-document.getElementById('btn-check').onclick = () => {
-  checkSolvability();
+document.getElementById('btn-check').onclick = (e) => {
+  if (e.ctrlKey || e.metaKey) {
+    exportLevelConfig();
+  } else {
+    checkSolvability();
+  }
 };
+
+function exportLevelConfig() {
+  const lv = getCurrentLevel();
+  const config = {
+    name: lv.name || 'CUSTOM',
+    cols: lv.cols,
+    rows: lv.rows,
+    pieces: lv.pieces.map(p => ({ shape: p.shape, color: p.color }))
+  };
+  const text = JSON.stringify(config);
+  navigator.clipboard.writeText(text).then(() => {
+    const banner = document.createElement('div');
+    banner.className = 'check-banner check-ok';
+    banner.textContent = '✓ CONFIG COPIED';
+    document.getElementById('board-container').appendChild(banner);
+    setTimeout(() => banner.remove(), 2000);
+  }).catch(() => {
+    const banner = document.createElement('div');
+    banner.className = 'check-banner check-fail';
+    banner.textContent = '✗ COPY FAILED';
+    document.getElementById('board-container').appendChild(banner);
+    setTimeout(() => banner.remove(), 2000);
+  });
+}
 
 function checkSolvability() {
   if (state.dragPiece) return;

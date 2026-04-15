@@ -447,6 +447,11 @@ body {
     letter-spacing: 6px;
 }
 
+.header-left {
+    display: flex;
+    gap: 10px;
+}
+
 .header-controls {
     display: flex;
     gap: 10px;
